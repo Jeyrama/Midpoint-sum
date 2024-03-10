@@ -18,3 +18,6 @@ Here are the two important rules:
   Both the first and last index cannot be considered 
   as a "midpoint" (So None for [X] and [X, X])
 */
+
+
+// Solution
