@@ -21,3 +21,14 @@ Here are the two important rules:
 
 
 // Solution
+
+const midpointSum = function(n) {
+  if (n.length < 3) {return null}
+  for (let i = 1; i < n.length - 1; i++) {
+    let left = n.slice(0, i).reduce((x, y) => x + y);
+    let right = n.slice(i + 1).reduce((x, y) => x + y);
+    if (left === right) {
+      return i;
+    }
+  }
+};
