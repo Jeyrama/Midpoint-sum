@@ -58,3 +58,40 @@ function midpointSum(arr) {
   
   return void 0
 }
+
+// or
+
+const midpointSum = list => {
+  let n = list.length;
+  
+  if ( n < 3 ) return;
+  if ( n === 3 && list[0] !== list[2] ) return;
+  
+  let median = n >> 1;
+  // sum of bunch elements calculates only initially
+  let left = list.slice(0, median).reduce((a, b) => a + b);
+  let right = list.slice(median + 1).reduce((a, b) => a + b);
+  /**
+   * It's the key for this optimization.
+   * When we define that one side is less than other we traverse by one to the largest direction
+   * to gain a "ballance" or equality of both sides. If the next step forces us to move opposite, 
+   * it means that we stuck and ballance/equality is unreachable.
+   */
+  let direction;
+  
+  while ( median > 0 ) {
+    if ( left === right ) return median;
+    
+    if ( left < right ) {
+      if ( direction === -1 ) return;
+      direction = 1;
+      left += list[median++];
+      right -= list[median];
+    } else {
+      if ( direction === 1 ) return;
+      direction = -1;
+      left -= list[median--];
+      right += list[median];
+    }
+  }
+};
