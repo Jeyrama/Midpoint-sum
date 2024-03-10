@@ -32,3 +32,29 @@ const midpointSum = function(n) {
     }
   }
 };
+
+// or
+
+function midpointSum(arr) {
+  let n = arr.length
+  
+  // No midpoint
+  if (n < 3) return void 0
+
+  let sum = 0
+  let mid = arr[0]
+  
+  // Compute sum only once
+  for (let i = 0; i < n; i++) {
+    sum += arr[i]
+  }
+  
+  // Compute sums of left and right parts
+  for (let i = 1; i < n - 1; i++) {
+    let cur = arr[i]
+    if (mid === sum - mid - cur) return i
+    mid += arr[i]
+  }
+  
+  return void 0
+}
